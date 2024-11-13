@@ -1,7 +1,10 @@
 #' @keywords internal
 prepLongData <- function(long.formula, data, id, time.long) {
-  
-  long.data <- merge(data$longitudinal, data$baseline, by = id, sort = FALSE)
+  long.data <- if (is.data.frame(data$baseline)) {
+    merge(data$longitudinal, data$baseline, by = id, sort = FALSE)
+  } else {
+    data$longitudinal
+  }
   long.frame <- model.frame(long.formula, data = long.data)
   long.cov <- model.matrix(long.formula, long.frame)
   long.terms <- terms(long.formula, data = long.data)
