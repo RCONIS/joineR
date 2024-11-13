@@ -55,7 +55,7 @@ summary.jointdata <- function(object, ...) {
     names(out[[2]]) <- c("class")
     row.names(out[[2]]) <- names(object$longitudinal)[2:(dim(object$longitudinal)[2])]
     for (j in 2:(dim(object$longitudinal)[2])) {
-      out[[2]][(j - 1), 1] <- class(object$longitudinal[, j])
+      out[[2]][(j - 1), 1] <- class(object$longitudinal[, j, drop = TRUE])
     }
   }
   
